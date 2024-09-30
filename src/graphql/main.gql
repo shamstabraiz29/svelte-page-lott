@@ -1,0 +1,197 @@
+query listMyAutoPaymentSubscriptions {
+  listMyAutoPaymentSubscriptions {
+    id
+    name
+    plateValue
+    city
+    small
+    large
+    letter
+    image {
+      imageUrl
+    }
+    currentParkEntry {
+      id
+      elapsedSeconds
+      currentFare
+      disableAutoPayment
+    }
+    lastParkEntry {
+      enteredAt
+    }
+    status
+  }
+}
+
+query getMyAutoPaymentSubscription($id: String!) {
+  getMyAutoPaymentSubscription(data: { id: $id }) {
+    id
+    name
+    plateValue
+    image {
+      imageUrl
+    }
+    city
+    small
+    large
+    letter
+    currentParkEntry {
+      id
+      enteredAt
+      elapsedSeconds
+      currentFare
+      disableAutoPayment
+    }
+    lastParkEntry {
+      enteredAt
+    }
+    parkEntries {
+      park {
+        name
+      }
+      successfulPaymentRequests {
+        id
+        transactionDate
+        amount
+        parkEntry {
+          city
+          elapsedSeconds
+        }
+      }
+    }
+
+    status
+  }
+
+  listMyPaymentApparatuses {
+    cardBrand
+    cardLast4Digits
+    cardExpiresAt
+  }
+}
+query getMyPaymentRequest($id: String!) {
+  getMyPaymentRequest(data: { id: $id }) {
+    id
+    bizReferenceId
+    amount
+    cardBrand
+    cardExpiresAt
+    cardLast4Digits
+    transactionDate
+    receiptUrl
+    parkEntry {
+      id
+      city
+      elapsedSeconds
+      small
+      large
+      letter
+      autoPaymentSubscription {
+        name
+      }
+      plateValue
+      images {
+        imageUrl
+      }
+      park {
+        name
+      }
+    }
+  }
+}
+
+query listMyPaidParkEntries {
+  listMyPaidParkEntries {
+    successfulPaymentRequests {
+      id
+      amount
+      transactionDate
+      parkEntry {
+        park {
+          name
+        }
+        plateValue
+      }
+    }
+  }
+}
+
+query getAuthenticatedUrl($data: InputDetail!) {
+  getAuthenticatedUrl(data: $data) {
+    id
+    customToken
+    userId
+    url
+    expiresAt
+  }
+}
+
+query GetAutoPaymentApplication($data: InputDetail!) {
+  getAutoPaymentApplication(data: $data) {
+    image {
+      imageUrl
+    }
+    phoneNumber
+    cardLast4Digits
+    cardBrand
+    plateValue
+    city
+    large
+    small
+    letter
+  }
+}
+
+query CheckUserExists($data: CheckUserExists!) {
+  checkUserExists(data: $data) {
+    exists
+  }
+}
+
+mutation UpdateAutoPaymentSubscription(
+  $id: String!
+  $status: AutoPaymentSubscriptionStatus!
+) {
+  updateMyAutoPaymentSubscription(data: { id: $id, status: $status }) {
+    id
+  }
+}
+
+mutation UpdateParkEntry($id: String!, $disableAutoPayment: Boolean!) {
+  updateMyParkEntry(
+    data: { id: $id, disableAutoPayment: $disableAutoPayment }
+  ) {
+    id
+  }
+}
+
+mutation DeleteMyAutoPaymentSubscription($data: InputDelete!) {
+  deleteMyAutoPaymentSubscription(data: $data) {
+    deletedId
+  }
+}
+mutation ActivateAutoPaymentApplication(
+  $data: InputActivateAutoPaymentApplication!
+) {
+  activateAutoPaymentApplication(data: $data) {
+    customToken
+  }
+}
+
+mutation updateMyAutoPaymentSubscription($id: String!, $name: String!) {
+  updateMyAutoPaymentSubscription(data: { id: $id, name: $name }) {
+    id
+  }
+}
+
+mutation changeUserAttributes($data: UserAttrDetail!) {
+  changeUserAttributes(data: $data) {
+    displayName
+  }
+}
+
+mutation DeleteUser {
+  deleteUser {
+    uid
+  }
+}

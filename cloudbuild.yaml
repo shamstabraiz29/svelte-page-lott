@@ -1,0 +1,22 @@
+steps:
+  - id: build-push
+    name: gcr.io/kaniko-project/executor:latest
+    args:
+      - --destination=$_IMAGE_NAME
+      - --build-arg=VITE_PUBLIC_API_URL=$_PUBLIC_API_URL
+      - --build-arg=VITE_PUBLIC_FIREBASE_CONFIG=$_PUBLIC_FIREBASE_CONFIG
+      - --cache=true
+  - name: gcr.io/cloud-builders/gcloud
+    waitFor:
+      - build-push
+    args:
+      - run
+      - deploy
+      - $_SERVICE_NAME
+      - --service-account=$_SERVICE_ACCOUNT
+      - --image=$_IMAGE_NAME
+      - --ingress=internal-and-cloud-load-balancing
+      - --region=$_REGION
+      - --platform=managed
+      - --allow-unauthenticated
+timeout: 3600s

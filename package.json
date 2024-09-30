@@ -1,0 +1,43 @@
+{
+  "name": "Lott",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "graphql-codegen": "graphql-codegen -r dotenv/config"
+  },
+  "devDependencies": {
+    "@fontsource/fira-mono": "^4.5.10",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@neoconfetti/svelte": "^1.0.0",
+    "@sveltejs/adapter-auto": "^2.0.0",
+    "@sveltejs/adapter-node": "^3.0.1",
+    "@sveltejs/kit": "^1.27.4",
+    "@types/cookie": "^0.5.1",
+    "autoprefixer": "^10.4.16",
+    "flowbite": "^2.2.0",
+    "flowbite-svelte": "^0.44.20",
+    "graphql": "^16.8.1",
+    "graphql-codegen-svelte-apollo": "^1.1.0",
+    "postcss": "^8.4.32",
+    "svelte": "^4.2.7",
+    "svelte-check": "^3.6.0",
+    "tailwindcss": "^3.3.6",
+    "tslib": "^2.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^4.4.2"
+  },
+  "type": "module",
+  "dependencies": {
+    "@apollo/client": "^3.8.8",
+    "@lottiefiles/svelte-lottie-player": "^0.2.0",
+    "date-fns": "^3.0.6",
+    "firebase": "^10.7.1",
+    "lottie-web": "^5.10.1"
+  }
+}
